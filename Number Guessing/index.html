@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing</title>
+    <style>
+        body{
+            background-color: rgb(185, 227, 233);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            height: 400px;
+            width: 350px;
+            border: 2px solid black;
+            border-radius: 25px;
+            display: grid;
+            justify-content: center;
+            align-content: center;
+            background-color: rgb(156, 174, 255);;
+            font-size: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        h3{
+            margin-top: -60px;
+            padding-left: 15px;
+        }
+        p{
+            margin-top: -20px;
+            padding-left: 15px;
+        }
+        button{
+            font-size: 18px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        input{
+            height: 50px;
+            width: 250px;
+            border-radius: 25px;
+            margin: 15px;
+            padding-left: 15px;
+            font-size: 17px;
+        }
+        button{
+            height: 35px;
+            width: 100px;
+            border-radius: 20px;
+            margin-left: 100px;
+            margin-top: 15px;
+        }
+        @media(max-width : 480px){
+            body{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .container{
+                height: 300px;
+                width: 250px;
+                font-size: 15px;
+                margin: 0px;
+                padding: 0px;
+                /* display: grid;
+                justify-content: center;
+                align-content: center; */
+            }
+            h3{
+                padding-top: 10px;
+            }
+            p{
+                padding-top: 5px;
+                margin-top: -25px;
+                margin-bottom: 40px;
+            }
+            input{
+                height: 30px;
+                width: 190px;
+                font-size: 14px;
+                margin: auto;
+                padding: auto;
+            }
+            button{
+                height: 30px;
+                width: 80px;
+                margin-left: 70px;
+                font-size : 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <br><br>
+        <h3>Number Guessing Game</h3>
+        <p>Guess a Number between 1-100</p>
+        <!-- <div id="randomNum"></div> -->
+        <form>
+            <input type="number" placeholder="Input a Number" id="number" min="0" max="100"><br>
+            <!-- <input type="password" placeholder="Password" id="pass"><br> -->
+            <button id="sub">Guess</button>
+             <!-- <input type="submit" id="sub"> -->
+        </form>
+        
+        <br>Previous Guesses: 
+        <div id="previous"></div>
+        <div id="chances"></div>
+        <div id="output"></div>
+
+    </div>
+
+    <script>
+        const random = parseInt(Math.random() * 100 + 1)
+        // randomNum.innerHTML = random
+
+        const number = document.querySelector("#number")
+        const output = document.querySelector("#output")
+        const butt = document.querySelector("#sub")
+        const previous = document.querySelector("#previous")
+        const chances = document.querySelector("#chances")
+
+        let myArr = []
+        let chanceRemain = 10;
+        
+        
+        butt.addEventListener("click" , function(event){
+            event.preventDefault()
+            myArr.push(number.value)
+            previous.innerHTML = myArr
+
+            if(random > number.value){
+                output.innerHTML = "Too Low🙁, Try Again🫡"
+                number.value = ''
+                chanceRemain--
+            }
+            else if (random == number.value) {
+                output.innerHTML = "Congrats, You Won 😎🏆"
+                number.value = ''
+                chanceRemain--
+            } 
+            else if(random < number.value){
+                output.innerHTML = "Too High🙁, Try Again🫡"
+                number.value = ''
+                chanceRemain--
+            }
+
+            chances.innerHTML = `chances remain : ${chanceRemain}`
+            if(chanceRemain === 0){
+                alert("You Lost😞, Try Again")
+                window.location.reload()
+            }
+
+            // chances.innerHTML = chance-- 
+            // chances.innerHTML = "Chances Remaining: "
+            // chance--
+            // if(chance.value <= 0){
+            //     alert("You Lost, Try Again")
+            // }
+        })
+        
+
+    </script>
+</body>
+</html>
